@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Koulen&family=Lato&family=Nunito&family=Playfair+Display:ital@1&family=Prata&family=Raleway:ital,wght@1,100&family=Roboto&family=Roboto+Condensed&family=Teko&display=swap');
+
+body {
+	background: rgb(255, 231, 196);
+	background: linear-gradient(90deg, rgba(255, 231, 196, 1) 4%, rgba(2, 0, 36, 1) 100%, rgba(0, 212, 255, 1) 100%);
+}
+
+.cuadro_calculadora {
+	border: 4px double #ffb872;
+}
+
+.btn_calculadora {
+	width: 100px;
+	font-weight: 600 !important;
+}
+
+.texto_resultado {
+	text-decoration: underline;
+	font-weight: 600;
+}
