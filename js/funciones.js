@@ -1,4 +1,6 @@
-let numeros = [], numeros_temporales = [], resultado, operadores_validos = ["+", "-", "/", "*"];
+let numeros = [],
+    numeros_temporales = [],
+    resultado, operadores_validos = ["+", "-", "/", "*"];
 
 let etiqueta_resultado = document.getElementById("resultado");
 
@@ -31,10 +33,10 @@ function calculadora(caracter) {
             numeros_temporales.splice(0, numeros_temporales.length);
         }
     };
-    
+
 };
 
-function resultado_calcular(caracter){
+function resultado_calcular(caracter) {
 
     let ultimo_caracter = numeros[numeros.length - 1];
     if (!operadores_validos.includes(ultimo_caracter)) {
@@ -49,10 +51,18 @@ function resultado_calcular(caracter){
                     text: 'No puedes dividir entre 0'
                 });
             } else {
-                resultado = eval(str_operador);
-                etiqueta_resultado.innerHTML = resultado;
-                numeros.splice(0, numeros.length);
-                numeros.push(resultado);
+                if (str_operador === ".") {
+                    Swal.fire({
+                        icon: 'error',
+                        title: '¡Error!',
+                        text: 'Revisa tu operación.'
+                    });
+                } else {
+                    resultado = eval(str_operador);
+                    etiqueta_resultado.innerHTML = resultado;
+                    numeros.splice(0, numeros.length);
+                    numeros.push(resultado);
+                }
             };
         } else {
             etiqueta_resultado.innerHTML = "Syntax error!";
@@ -66,6 +76,6 @@ function resultado_calcular(caracter){
             text: 'La operación a realizar no es soportada.'
         });
     };
-    
+
 
 };
