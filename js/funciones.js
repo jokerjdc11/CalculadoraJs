@@ -1,4 +1,4 @@
-let numeros = [], numeros_temporales = [], resultado;
+let numeros = [], numeros_temporales = [], resultado, operadores_validos = ["+", "-", "/", "*"];
 
 let etiqueta_resultado = document.getElementById("resultado");
 
@@ -10,30 +10,62 @@ function calculadora(caracter) {
         etiqueta_resultado.innerHTML = "¡Ingresa datos a calcular!";
         numeros.splice(0, numeros.length);
         numeros_temporales.splice(0, numeros_temporales.length);
-    } else if (validar_numero === true) {
+    } else if (validar_numero === true || caracter === ".") {
         let num = caracter.toString();
         numeros_temporales.push(caracter);
         numeros.push(num);
         etiqueta_resultado.innerHTML = numeros_temporales.join("");
+    } else if (caracter === "C") {
+        numeros_temporales.pop();
+        etiqueta_resultado.innerHTML = numeros_temporales.join("");
     } else {
-        let nume = caracter.toString();
-        numeros.push(nume);
-        numeros_temporales.splice(0, numeros_temporales.length);
+        if (caracter === "." && numeros[numeros.length - 1] === ".") {
+            Swal.fire({
+                icon: 'error',
+                title: '¡Error!',
+                text: 'Revisa tu operación.'
+            });
+        } else {
+            let nume = caracter.toString();
+            numeros.push(nume);
+            numeros_temporales.splice(0, numeros_temporales.length);
+        }
     };
     
 };
 
 function resultado_calcular(caracter){
 
-    if (numeros.length > 0) {
-        const str_operador = numeros.join("");
-        resultado = eval(str_operador);
-        etiqueta_resultado.innerHTML = resultado;
-        numeros.splice(0, numeros.length);
-        numeros.push(resultado);
+    let ultimo_caracter = numeros[numeros.length - 1];
+    if (!operadores_validos.includes(ultimo_caracter)) {
+        if (numeros.length > 0 && caracter === "=") {
+            console.log(`Los números temporales son: ${numeros_temporales}`);
+            console.log(`Los números: ${numeros}`);
+            const str_operador = numeros.join("");
+            if (str_operador.slice(-2) === "/0") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'No puedes dividir entre 0'
+                });
+            } else {
+                resultado = eval(str_operador);
+                etiqueta_resultado.innerHTML = resultado;
+                numeros.splice(0, numeros.length);
+                numeros.push(resultado);
+            };
+        } else {
+            etiqueta_resultado.innerHTML = "Syntax error!";
+            numeros_temporales.splice(0, numeros_temporales.length);
+        };
     } else {
-        etiqueta_resultado.innerHTML = "Syntax error!";
-        numeros_temporales.splice(0, numeros_temporales.length);
+        numeros.pop();
+        Swal.fire({
+            icon: 'question',
+            title: 'Lo sentimos',
+            text: 'La operación a realizar no es soportada.'
+        });
     };
+    
 
 };
