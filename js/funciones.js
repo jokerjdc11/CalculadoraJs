@@ -22,8 +22,8 @@ function calculadora(caracter) {
         if (caracter === "." && numeros[numeros.length - 1] === ".") {
             Swal.fire({
                 icon: 'error',
-                title: 'Oops...',
-                text: 'Ojito: ¡Operación no válida!'
+                title: '¡Error!',
+                text: 'Revisa tu operación.'
             });
         } else {
             let nume = caracter.toString();
@@ -37,7 +37,6 @@ function calculadora(caracter) {
 function resultado_calcular(caracter){
 
     let ultimo_caracter = numeros[numeros.length - 1];
-    let penultimo_caracter = numeros[numeros.length - 2];
     if (!operadores_validos.includes(ultimo_caracter)) {
         if (numeros.length > 0 && caracter === "=") {
             console.log(`Los números temporales son: ${numeros_temporales}`);
@@ -47,7 +46,7 @@ function resultado_calcular(caracter){
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
-                    text: 'Perro que esta haciendo ñero'
+                    text: 'No puedes dividir entre 0'
                 });
             } else {
                 resultado = eval(str_operador);
@@ -62,9 +61,9 @@ function resultado_calcular(caracter){
     } else {
         numeros.pop();
         Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'Ojito: ¡Operación no válida!'
+            icon: 'question',
+            title: 'Lo sentimos',
+            text: 'La operación a realizar no es soportada.'
         });
     };
     
