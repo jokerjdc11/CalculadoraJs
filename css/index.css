@@ -6,14 +6,14 @@ body {
 
 .cuadro_calculadora {
     border: 2px solid #ffb872;
-    height: 450px;
+    height: 520px;
     -webkit-box-shadow: 1px -1px 35px 7px rgba(0, 0, 0, 0.75);
     -moz-box-shadow: 1px -1px 35px 7px rgba(0, 0, 0, 0.75);
     box-shadow: 1px -1px 35px 7px rgba(0, 0, 0, 0.75);
 }
 
 .box-number {
-    height: 270px;
+    height: 320px;
     border: 2px solid #ffb872;
     padding: 0 10px;
 }
